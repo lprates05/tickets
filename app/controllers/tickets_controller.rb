@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
   
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
   @tickets = Ticket.includes(:event, :seller).where(status: "available")
   end
@@ -11,12 +13,13 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
-    @ticket.seller = User.first  # TEMP: replace with current_user when Devise is set up
+    @ticket.seller = current_user
     @ticket.status = "available"
 
     if @ticket.save
       redirect_to tickets_path, notice: "Ticket listed successfully!"
     else
+      @events = Event.all
       render :new
     end
   end
