@@ -7,6 +7,7 @@
 #  end_date    :date
 #  end_time    :time
 #  event_photo :string
+#  name        :string
 #  start_date  :date
 #  start_time  :time
 #  timezone    :string

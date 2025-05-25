@@ -10,6 +10,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  buyer_id            :integer
+#  event_id            :integer
 #  seller_id           :integer
 #
 class Ticket < ApplicationRecord
