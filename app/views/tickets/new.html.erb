@@ -1,0 +1,30 @@
+<h1>Sell a Ticket</h1>
+
+<%= form_with model: @ticket, local: true do |form| %>
+  <div>
+    <%= form.label :event_id, "Select Event" %><br>
+    <%= form.collection_select :event_id, @events, :id, :name, prompt: "Choose an event" %>
+  </div>
+
+  <div>
+    <%= form.label :price %><br>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :ticket_restrictions %><br>
+    <%= form.text_field :ticket_restrictions %>
+  </div>
+
+  <div>
+    <%= form.label :ticket_photo, "Photo URL" %><br>
+    <%= form.text_field :ticket_photo %>
+  </div>
+
+  <%= form.submit "List Ticket" %>
+<% end %>
+
+<p>
+  Can’t find your event?
+  <%= link_to "Create a new event", "#" %> <!-- We'll wire this later -->
+</p>

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  get 'events/new'
+  get 'events/create'
   get 'tickets/index'
 
-  # This is a blank app! Pick your first screen, build out the RCAV, and go from there. E.g.:
-
-  # get "/your_first_screen" => "pages#first"
+  resources :tickets, only: [:index, :new, :create]
   
 end

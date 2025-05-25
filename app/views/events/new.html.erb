@@ -1,0 +1,45 @@
+<h1>Create a New Event</h1>
+
+<%= form_with model: @event, local: true do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :category %><br>
+    <%= form.select :category, ["party", "conference", "social", "professional"], prompt: "Choose a category" %>
+  </div>
+
+  <div>
+    <%= form.label :start_date %><br>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div>
+    <%= form.label :end_date %><br>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div>
+    <%= form.label :start_time %><br>
+    <%= form.time_field :start_time %>
+  </div>
+
+  <div>
+    <%= form.label :end_time %><br>
+    <%= form.time_field :end_time %>
+  </div>
+
+  <div>
+    <%= form.label :timezone %><br>
+    <%= form.text_field :timezone, value: "Central Time (US & Canada)" %>
+  </div>
+
+  <div>
+    <%= form.label :event_photo, "Photo URL" %><br>
+    <%= form.text_field :event_photo %>
+  </div>
+
+  <%= form.submit "Create Event" %>
+<% end %>
