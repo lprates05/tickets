@@ -1,0 +1,12 @@
+<h1>Available Tickets</h1>
+
+<% @tickets.each do |ticket| %>
+  <div style="border: 1px solid #ccc; padding: 12px; margin-bottom: 10px;">
+    <img src="<%= ticket.ticket_photo %>" alt="Ticket Photo" width="150" height="100">
+    <p><strong>Event:</strong> <%= ticket.event.name %></p>
+    <p><strong>Seller:</strong> <%= ticket.seller.name %></p>
+    <p><strong>Price:</strong> $<%= ticket.price %></p>
+    <p><strong>Restrictions:</strong> <%= ticket.ticket_restrictions %></p>
+    <p><strong>Status:</strong> <%= ticket.status.capitalize %></p>
+  </div>
+<% end %>
