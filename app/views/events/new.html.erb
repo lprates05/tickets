@@ -14,7 +14,7 @@
 
         <div class="mb-3">
           <%= form.label :category %>
-          <%= form.text_field :category, class: "form-control" %>
+          <%= form.select :category, options_for_select(["Party", "Conference", "Professional", "Social", "Sports"], @event.category), {}, class: "form-select" %>
         </div>
 
         <div class="mb-3">
@@ -60,4 +60,3 @@
     </div>
   </div>
 </div>
-

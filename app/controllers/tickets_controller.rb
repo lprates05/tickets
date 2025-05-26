@@ -28,8 +28,14 @@ class TicketsController < ApplicationController
     if params[:date].present?
       @tickets = @tickets.joins(:event).where(events: { date: params[:date] })
     end
+
+    if params[:category].present?
+      @tickets = @tickets.joins(:event).where(events: { category: params[:category] })
+    end
+
   end
 
+  
   def show
     @ticket = Ticket.find(params[:id])
   end

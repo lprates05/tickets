@@ -17,5 +17,7 @@
 class Event < ApplicationRecord
   has_many :tickets, dependent: :destroy
   has_one_attached :event_photo
-  CATEGORIES = ["party", "conference", "professional", "sports"]
+
+  validates :category, presence: true, inclusion: { in: %w[Party Conference Professional Social Sports] }
+  CATEGORIES = ["Party", "Conference", "Professional", "Social", "Sports"]
 end

@@ -37,8 +37,19 @@
           <div class="card-body">
             <h5 class="card-title"><%= ticket.event.name %></h5>
             <p class="card-text">$<%= ticket.price %></p>
-            <%= link_to "View", ticket_path(ticket), class: "btn btn-outline-primary" %>
+            
           </div>
+        <div class="d-flex justify-content-around align-items-center mt-2">
+          <%= link_to "View", ticket_path(ticket), class: "btn btn-outline-primary" %>
+          <span>
+            <strong>Status:</strong>
+            <span class="badge <%= ticket.status == 'available' ? 'bg-success' : 'bg-secondary' %>">
+              <%= ticket.status.capitalize %>
+            </span>
+          </span>
+        </div>
+
+
         </div>
       </div>
     <% end %>

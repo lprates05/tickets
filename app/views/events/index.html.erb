@@ -6,7 +6,13 @@
 <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
   <% @events.each do |event| %>
     <div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: 300px;">
-      <img src="<%= event.event_photo %>" alt="Event photo" style="width: 100%; height: auto; border-radius: 4px;" />
+      
+      <% if event.event_photo.attached? %>
+        <%= image_tag event.event_photo, class: "card-img-top" %>
+      <% else %>
+        <%= image_tag "https://via.placeholder.com/400x300?text=No+Image", class: "card-img-top" %>
+      <% end %>
+
       <h2>
         <%= link_to event.name, event_path(event), style: "text-decoration: none; color: inherit;" %>
       </h2>
