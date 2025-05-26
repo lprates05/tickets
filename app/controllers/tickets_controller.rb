@@ -3,6 +3,9 @@ class TicketsController < ApplicationController
   before_action :authorize_ticket_owner!, only: [:edit, :update, :destroy]
   before_action :ensure_ticket_is_available, only: [:edit, :update, :destroy]
 
+  include Rails.application.routes.url_helpers
+
+
   def index
     @events = Event.all
     @categories = Event.distinct.pluck(:category)

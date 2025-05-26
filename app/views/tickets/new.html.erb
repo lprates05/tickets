@@ -1,6 +1,6 @@
 <h1>Sell a Ticket</h1>
 
-<%= form_with model: @ticket, local: true do |form| %>
+<%= form_with model: @ticket, local: true, html: { multipart: true } do |form| %>
   <div>
     <%= form.label :event_id, "Select Event" %><br>
     <%= form.collection_select :event_id, @events, :id, :name, prompt: "Choose an event" %>
@@ -17,8 +17,8 @@
   </div>
 
   <div>
-    <%= form.label :ticket_photo, "Photo URL" %><br>
-    <%= form.text_field :ticket_photo %>
+    <%= form.label :ticket_photo, "Upload Ticket Photo" %><br>
+    <%= form.file_field :ticket_photo %>
   </div>
 
   <%= form.submit "List Ticket" %>
@@ -28,4 +28,3 @@
   Can’t find your event?
   <%= link_to "Create a new event", new_event_path %>
 </p>
-

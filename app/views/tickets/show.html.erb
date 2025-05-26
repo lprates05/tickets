@@ -4,8 +4,11 @@
 <p><strong>Seller:</strong> <%= @ticket.seller.name %></p>
 <p><strong>Status:</strong> <%= @ticket.status %></p>
 
-<% if @ticket.ticket_photo.present? %>
-  <img src="<%= @ticket.ticket_photo %>" alt="Ticket Photo" style="width: 300px; height: auto; border-radius: 8px;">
+<% if @ticket.ticket_photo.attached? %>
+  <div>
+    <p><strong>Photo:</strong></p>
+    <%= image_tag url_for(@ticket.ticket_photo.variant(resize_to_limit: [300, 300])) %>
+  </div>
 <% end %>
 
 <% if user_signed_in? && @ticket.buyer.nil? && @ticket.seller != current_user %>
@@ -15,4 +18,3 @@
 <% elsif @ticket.seller == current_user %>
   <p><em>This is your own listing.</em></p>
 <% end %>
-

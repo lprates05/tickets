@@ -16,5 +16,5 @@
 #
 class Event < ApplicationRecord
   has_many :tickets, dependent: :destroy
+  has_one_attached :event_photo
 end
-
