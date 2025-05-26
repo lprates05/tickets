@@ -8,9 +8,9 @@
     <div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: 300px;">
       
       <% if event.event_photo.attached? %>
-        <%= image_tag event.event_photo, class: "card-img-top" %>
+        <%= image_tag event.event_photo, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
       <% else %>
-        <%= image_tag "https://via.placeholder.com/400x300?text=No+Image", class: "card-img-top" %>
+        <%= image_tag "https://via.placeholder.com/400x300?text=No+Image", class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
       <% end %>
 
       <h2>
