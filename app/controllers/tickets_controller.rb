@@ -20,9 +20,10 @@ class TicketsController < ApplicationController
       @tickets = @tickets.where(event_id: params[:event_id])
     end
 
-    if params[:category].present?
-      @tickets = @tickets.joins(:event).where("events.category ILIKE ?", "%#{params[:category]}%")
+    if params[:event_name].present?
+      @tickets = @tickets.joins(:event).where("LOWER(events.name) LIKE ?", "%#{params[:event_name].downcase}%")
     end
+
 
     if params[:date].present?
       @tickets = @tickets.joins(:event).where(events: { date: params[:date] })
