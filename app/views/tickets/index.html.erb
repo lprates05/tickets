@@ -2,7 +2,28 @@
   <%= @event.present? ? "Available Tickets for #{@event.name}" : "All Available Tickets" %>
 </h1>
 
-<%= link_to "← Back to Events", events_path %>
+<%= form_with url: tickets_path, method: :get, local: true do %>
+  <div>
+    <label>Filter by Event:</label>
+    <%= select_tag :event_id, options_from_collection_for_select(@events, :id, :name, params[:event_id]), include_blank: "All Events" %>
+  </div>
+
+  <div>
+    <label>Filter by Category:</label>
+    <%= select_tag :category, options_for_select(@categories, params[:category]), include_blank: "All Categories" %>
+  </div>
+
+  <div>
+    <%= hidden_field_tag :available_only, "0" %>
+    <label>
+      <%= check_box_tag :available_only, "1", params[:available_only] != "0" %>
+      Show available tickets only
+    </label>
+  </div>
+
+  <%= submit_tag "Apply Filters", class: "btn btn-primary" %>
+<% end %>
+
 
 
 <% @tickets.each do |ticket| %>

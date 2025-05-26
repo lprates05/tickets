@@ -4,11 +4,21 @@ class TicketsController < ApplicationController
   before_action :ensure_ticket_is_available, only: [:edit, :update, :destroy]
 
   def index
+    @events = Event.all
+    @categories = Event.distinct.pluck(:category)
+
+    @tickets = Ticket.all
+
+    if params[:available_only] != "0" # default behavior: only available
+      @tickets = @tickets.where(buyer_id: nil)
+    end
+
     if params[:event_id].present?
-      @event = Event.find(params[:event_id])
-      @tickets = @event.tickets.where(buyer_id: nil)
-    else
-      @tickets = Ticket.where(buyer_id: nil)
+      @tickets = @tickets.where(event_id: params[:event_id])
+    end
+
+    if params[:category].present?
+      @tickets = @tickets.joins(:event).where(events: { category: params[:category] })
     end
   end
 

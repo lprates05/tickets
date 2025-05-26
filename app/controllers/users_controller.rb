@@ -19,6 +19,13 @@ class UsersController < ApplicationController
     @tickets = Ticket.where(buyer_id: @user.id)
   end
 
+  def profile
+    @user = User.find(params[:id])
+    @listed_tickets = @user.listings
+    @purchased_tickets = @user.purchases
+  end
+
+
   private
 
   def set_user

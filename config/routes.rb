@@ -15,11 +15,14 @@ Rails.application.routes.draw do
   # Events routes
   resources :events, only: [:index, :new, :create, :show]
 
-  # User-specific routes (like My Listings and My Purchases)
+  # User-specific routes
   resources :users, only: [] do
     member do
       get :listings
       get :purchases
     end
   end
+
+  get "users/:id/profile", to: "users#profile", as: "profile_user"
+
 end
