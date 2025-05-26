@@ -1,30 +1,40 @@
-<h1>Sell a Ticket</h1>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h3>Sell a Ticket</h3>
+    </div>
+    <div class="card-body">
+      <%= form_with model: @ticket, local: true, html: { multipart: true } do |form| %>
+        
+        <div class="mb-3">
+          <%= form.label :event_id, "Select Event" %>
+          <%= form.collection_select :event_id, @events, :id, :name, { prompt: "Choose an event" }, class: "form-select" %>
+        </div>
 
-<%= form_with model: @ticket, local: true, html: { multipart: true } do |form| %>
-  <div>
-    <%= form.label :event_id, "Select Event" %><br>
-    <%= form.collection_select :event_id, @events, :id, :name, prompt: "Choose an event" %>
+        <p>
+          Can’t find your event?
+          <%= link_to "Create a new event", new_event_path %>
+        </p>
+        
+        <div class="mb-3">
+          <%= form.label :price %>
+          <%= form.number_field :price, step: 0.01, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :ticket_restrictions %>
+          <%= form.text_field :ticket_restrictions, class: "form-control" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= form.label :ticket_photo %>
+          <%= form.file_field :ticket_photo, class: "form-control" %>
+        </div>
+        
+        <%= form.submit "List Ticket", class: "btn btn-success" %>
+      <% end %>
+    </div>
+ 
   </div>
+</div>
 
-  <div>
-    <%= form.label :price %><br>
-    <%= form.number_field :price, step: 0.01 %>
-  </div>
-
-  <div>
-    <%= form.label :ticket_restrictions %><br>
-    <%= form.text_field :ticket_restrictions %>
-  </div>
-
-  <div>
-    <%= form.label :ticket_photo, "Upload Ticket Photo" %><br>
-    <%= form.file_field :ticket_photo %>
-  </div>
-
-  <%= form.submit "List Ticket" %>
-<% end %>
-
-<p>
-  Can’t find your event?
-  <%= link_to "Create a new event", new_event_path %>
-</p>

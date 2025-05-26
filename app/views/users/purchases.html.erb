@@ -1,4 +1,20 @@
-<h1>My Tickets</h1>
-<% @tickets.each do |ticket| %>
-  <p><%= ticket.event.name %> - $<%= ticket.price %></p>
-<% end %>
+<div class="container mt-5">
+  <h2 class="mb-4">My Purchases</h2>
+  <div class="row">
+    <% @tickets.each do |ticket| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <% if ticket.ticket_photo.attached? %>
+            <%= image_tag ticket.ticket_photo, class: "card-img-top" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= ticket.event.name %></h5>
+            <p class="card-text">Price: $<%= ticket.price %></p>
+            <p class="card-text">Seller: <%= ticket.seller.name %></p>
+            <span class="badge bg-success">Purchased</span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

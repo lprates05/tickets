@@ -1,44 +1,28 @@
-<h1>
-  <%= @event.present? ? "Available Tickets for #{@event.name}" : "All Available Tickets" %>
-</h1>
-
-<%= form_with url: tickets_path, method: :get, local: true do %>
-  <div>
-    <label>Filter by Event:</label>
-    <%= select_tag :event_id, options_from_collection_for_select(@events, :id, :name, params[:event_id]), include_blank: "All Events" %>
-  </div>
-
-  <div>
-    <label>Filter by Category:</label>
-    <%= select_tag :category, options_for_select(@categories, params[:category]), include_blank: "All Categories" %>
-  </div>
-
-  <div>
-    <%= hidden_field_tag :available_only, "0" %>
-    <label>
-      <%= check_box_tag :available_only, "1", params[:available_only] != "0" %>
-      Show available tickets only
-    </label>
-  </div>
-
-  <%= submit_tag "Apply Filters", class: "btn btn-primary" %>
-<% end %>
-
-
-
-<% @tickets.each do |ticket| %>
-  <div style="border: 1px solid #ccc; padding: 12px; margin-bottom: 10px;">
-    <% if ticket.ticket_photo.attached? %>
-      <%= image_tag ticket.ticket_photo.variant(resize_to_limit: [150, 150]) %>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Find a Ticket</h2>
+    <%= form_with url: tickets_path, method: :get, local: true do |form| %>
+      <div class="form-check form-switch">
+        <%= form.check_box :available_only, checked: params[:available_only] != "0", class: "form-check-input" %>
+        <%= form.label :available_only, "Show available tickets only", class: "form-check-label" %>
+      </div>
     <% end %>
-    <p><strong>Event:</strong> <%= ticket.event.name %></p>
-    <p><strong>Seller:</strong> <%= ticket.seller.name %></p>
-    <p><strong>Price:</strong> $<%= ticket.price %></p>
-    <p><strong>Restrictions:</strong> <%= ticket.ticket_restrictions %></p>
-    <p><strong>Status:</strong> <%= ticket.status.capitalize %></p>
-    <% if ticket.status == "available" && ticket.seller_id != current_user.id %>
-      <%= button_to "Buy Ticket", purchase_ticket_path(ticket), method: :post, class: "btn btn-primary" %>
-    <% end %>
-
   </div>
-<% end %>
+
+  <div class="row">
+    <% @tickets.each do |ticket| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <% if ticket.ticket_photo.attached? %>
+            <%= image_tag ticket.ticket_photo, class: "card-img-top" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= ticket.event.name %></h5>
+            <p class="card-text">$<%= ticket.price %></p>
+            <%= link_to "View", ticket_path(ticket), class: "btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
