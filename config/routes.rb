@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   root to: "tickets#index"
 
   # Tickets routes
-  resources :tickets, only: [:index, :new, :create]
+  resources :tickets, only: [:index, :new, :create, :show]
 
   # Events routes
-  resources :events, only: [:index, :new, :create]
+  resources :events, only: [:index, :new, :create, :show]
 
   # User-specific routes (like My Listings and My Purchases)
   resources :users, only: [] do
@@ -19,4 +19,3 @@ Rails.application.routes.draw do
     end
   end
 end
-

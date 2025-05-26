@@ -1,0 +1,11 @@
+<h1>Ticket Details</h1>
+
+<p><strong>Price:</strong> $<%= @ticket.price %></p>
+<p><strong>Seller:</strong> <%= @ticket.seller.name %></p>
+<p><strong>Status:</strong> <%= @ticket.status %></p>
+
+<% if @ticket.ticket_photo.present? %>
+  <img src="<%= @ticket.ticket_photo %>" alt="Ticket Photo" style="width: 300px; height: auto; border-radius: 8px;">
+<% end %>
+
+<%# In the next step, we’ll add a button to purchase if it's available %>

@@ -1,10 +1,14 @@
 class EventsController < ApplicationController
   
   def index
-  @events = Event.all
-end
+    @events = Event.all
+  end
 
-  
+  def show
+    @event = Event.find(params[:id])
+    @tickets = @event.tickets.where(buyer_id: nil) # Only unsold tickets
+  end
+
   def new
     @event = Event.new
   end
