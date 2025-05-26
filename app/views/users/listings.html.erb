@@ -1,0 +1,4 @@
+<h1>My Tickets</h1>
+<% @tickets.each do |ticket| %>
+  <p><%= ticket.event.name %> - $<%= ticket.price %></p>
+<% end %>

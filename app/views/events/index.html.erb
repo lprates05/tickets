@@ -1,0 +1,21 @@
+<!-- app/views/events/index.html.erb -->
+<h1>All Events</h1>
+
+<div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+  <% @events.each do |event| %>
+    <div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: 300px;">
+      <img src="<%= event.event_photo %>" alt="Event photo" style="width: 100%; height: auto; border-radius: 4px;" />
+      <h2><%= event.name %></h2>
+      <p><strong>Category:</strong> <%= event.category %></p>
+      <p><strong>Date:</strong> <%= event.start_date %> to <%= event.end_date %></p>
+      <p><strong>Time:</strong> <%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %> <%= event.timezone %></p>
+
+      <% available_tickets = event.tickets.where(buyer_id: nil) %>
+      <% if available_tickets.any? %>
+        <%= link_to "View Tickets (#{available_tickets.count})", tickets_path(event_id: event.id), style: "display: inline-block; margin-top: 0.5rem; background: #007bff; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none;" %>
+      <% else %>
+        <p style="color: gray;">No tickets available</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

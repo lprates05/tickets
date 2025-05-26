@@ -1,13 +1,22 @@
 Rails.application.routes.draw do
+  # Devise user authentication
   devise_for :users
-  get 'events/new'
-  get 'events/create'
-  get 'tickets/index'
 
-  resources :tickets, only: [:index, :new, :create]
-  resources :tickets, only: [:index, :new, :create]
-  resources :events, only: [:new, :create]
-
+  # Root page
   root to: "tickets#index"
-  
+
+  # Tickets routes
+  resources :tickets, only: [:index, :new, :create]
+
+  # Events routes
+  resources :events, only: [:index, :new, :create]
+
+  # User-specific routes (like My Listings and My Purchases)
+  resources :users, only: [] do
+    member do
+      get :listings
+      get :purchases
+    end
+  end
 end
+
