@@ -12,8 +12,8 @@ class TicketsController < ApplicationController
 
     @tickets = Ticket.all
 
-    if params[:available_only] != "0" # default behavior: only available
-      @tickets = @tickets.where(buyer_id: nil)
+    if params[:available_only] != "0"
+      @tickets = @tickets.where(status: "available")
     end
 
     if params[:event_id].present?
@@ -21,7 +21,11 @@ class TicketsController < ApplicationController
     end
 
     if params[:category].present?
-      @tickets = @tickets.joins(:event).where(events: { category: params[:category] })
+      @tickets = @tickets.joins(:event).where("events.category ILIKE ?", "%#{params[:category]}%")
+    end
+
+    if params[:date].present?
+      @tickets = @tickets.joins(:event).where(events: { date: params[:date] })
     end
   end
 

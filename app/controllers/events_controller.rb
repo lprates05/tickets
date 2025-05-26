@@ -21,6 +21,10 @@ class EventsController < ApplicationController
     else
       render :new
     end
+
+    if params[:category].present?
+      @tickets = @tickets.joins(:event).where(events: { category: params[:category] })
+    end
   end
 
   private
