@@ -1,45 +1,63 @@
-<h1>Create a New Event</h1>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h3 class="mb-0">Create a New Event</h3>
+    </div>
 
-<%= form_with model: @event, local: true, data: { controller: "event-date-sync" } do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+    <div class="card-body">
+      <%= form_with model: @event, local: true do |form| %>
+        
+        <div class="mb-3">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :category %>
+          <%= form.text_field :category, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :location %>
+          <%= form.text_field :location, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :start_date %>
+          <%= form.date_field :start_date, data: { "event-date-sync-target": "start", action: "change->event-date-sync#syncEndDate" }, class: "form-control" %>
+        </div>     
+
+        <div class="mb-3">
+          <%= form.label :end_date %><br>
+          <%= form.date_field :end_date, data: { "event-date-sync-target": "end" }, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :start_time %>
+          <%= form.time_field :start_time, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :end_time %>
+          <%= form.time_field :end_time, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :timezone %>
+          <%= form.text_field :timezone, class: "form-control" %>
+        </div>     
+
+        <div>
+          <%= form.label :event_photo, "Upload Event Photo" %><br>
+          <%= form.file_field :event_photo, class: "form-control" %>
+        </div>
+
+      
+        <%= form.submit "Create Event", class: "btn btn-primary" %>
+      
+      <% end %>
+      
+    </div>
   </div>
+</div>
 
-  <div>
-    <%= form.label :category %><br>
-    <%= form.select :category, ["party", "conference", "social", "professional"], prompt: "Choose a category" %>
-  </div>
-
-  <div>
-    <%= form.label :start_date %><br>
-    <%= form.date_field :start_date, data: { "event-date-sync-target": "start", action: "change->event-date-sync#syncEndDate" } %>
-  </div>
-
-  <div>
-    <%= form.label :end_date %><br>
-    <%= form.date_field :end_date, data: { "event-date-sync-target": "end" } %>
-  </div>
-
-  <div>
-    <%= form.label :start_time %><br>
-    <%= form.time_field :start_time %>
-  </div>
-
-  <div>
-    <%= form.label :end_time %><br>
-    <%= form.time_field :end_time %>
-  </div>
-
-  <div>
-    <%= form.label :timezone %><br>
-    <%= form.text_field :timezone, value: "Central Time (US & Canada)" %>
-  </div>
-
-  <div>
-    <%= form.label :event_photo, "Upload Event Photo" %><br>
-    <%= form.file_field :event_photo %>
-  </div>
-
-  <%= form.submit "Create Event" %>
-<% end %>
