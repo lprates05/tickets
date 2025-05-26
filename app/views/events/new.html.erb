@@ -24,12 +24,12 @@
 
         <div class="mb-3">
           <%= form.label :start_date %>
-          <%= form.date_field :start_date, data: { "event-date-sync-target": "start", action: "change->event-date-sync#syncEndDate" }, class: "form-control" %>
+          <%= form.date_field :start_date, class: "form-control", id: "start_date" %>
         </div>     
 
         <div class="mb-3">
           <%= form.label :end_date %><br>
-          <%= form.date_field :end_date, data: { "event-date-sync-target": "end" }, class: "form-control" %>
+          <%= form.date_field :end_date, class: "form-control", id: "end_date" %>
         </div>
 
         <div class="mb-3">

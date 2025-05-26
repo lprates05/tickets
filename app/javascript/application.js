@@ -5,6 +5,18 @@ import "controllers"
 
 Turbo.session.drive = false
 
+document.addEventListener("DOMContentLoaded", function () {
+  const startDateInput = document.getElementById("start_date");
+  const endDateInput = document.getElementById("end_date");
+
+  if (startDateInput && endDateInput) {
+    startDateInput.addEventListener("change", function () {
+      endDateInput.value = startDateInput.value;
+    });
+  }
+});
+
+
 import jquery from "jquery";
 window.jQuery = jquery;
 window.$ = jquery;

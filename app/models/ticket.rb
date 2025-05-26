@@ -27,4 +27,12 @@ class Ticket < ApplicationRecord
   belongs_to :event
 
   has_one_attached :ticket_photo
+
+  before_save :sync_status_with_buyer
+
+    private
+
+    def sync_status_with_buyer
+      self.status = buyer_id.present? ? "unavailable" : "available"
+    end
 end
