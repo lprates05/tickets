@@ -1,37 +1,28 @@
-<h1><%= @user.name %>'s Profile</h1>
-
-<p><strong>Email:</strong> <%= @user.email %></p>
-<p><strong>Bio:</strong> <%= @user.bio %></p>
-<p><strong>Class Year:</strong> <%= @user.class_year %></p>
-<% if @user.profile_photo.present? %>
-  <p><img src="<%= @user.profile_photo %>" alt="Profile Photo" style="max-width: 200px; border-radius: 10px;"></p>
-<% end %>
-
-<hr>
-
-<h2>Listed Tickets</h2>
-<% if @listed_tickets.any? %>
-  <% @listed_tickets.each do |ticket| %>
-    <div style="border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem;">
-      <p><strong>Event:</strong> <%= ticket.event.name %></p>
-      <p><strong>Price:</strong> $<%= ticket.price %></p>
-      <p><strong>Status:</strong> <%= ticket.status %></p>
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <div class="d-flex align-items-center mb-4">
+      <% if current_user.profile_photo.present? %>
+        <img src="<%= current_user.profile_photo %>" alt="Profile Photo" class="rounded-circle me-3" width="80" height="80">
+      <% else %>
+        <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center text-white me-3" style="width: 80px; height: 80px;">
+          <strong><%= current_user.name.first %></strong>
+        </div>
+      <% end %>
+      <div>
+        <h4 class="mb-0"><%= current_user.name %></h4>
+        <small class="text-muted"><%= current_user.email %></small>
+      </div>
     </div>
-  <% end %>
-<% else %>
-  <p>No tickets listed.</p>
-<% end %>
 
-<hr>
-
-<h2>Purchased Tickets</h2>
-<% if @purchased_tickets.any? %>
-  <% @purchased_tickets.each do |ticket| %>
-    <div style="border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem;">
-      <p><strong>Event:</strong> <%= ticket.event.name %></p>
-      <p><strong>Price:</strong> $<%= ticket.price %></p>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <h6 class="text-uppercase text-muted">My Listings</h6>
+        <%= link_to "View Tickets I'm Selling", listings_user_path(current_user), class: "btn btn-outline-primary w-100" %>
+      </div>
+      <div class="col-md-6 mb-3">
+        <h6 class="text-uppercase text-muted">My Purchases</h6>
+        <%= link_to "View Tickets I've Bought", purchases_user_path(current_user), class: "btn btn-outline-primary w-100" %>
+      </div>
     </div>
-  <% end %>
-<% else %>
-  <p>No tickets purchased.</p>
-<% end %>
+  </div>
+</div>
