@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # Devise user authentication
-  devise_for :users
+  devise_for :users, sign_out_via: [:get, :delete]
+
 
   # Root page
   root to: "main#homepage"
