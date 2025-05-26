@@ -1,4 +1,9 @@
-<h1>Available Tickets</h1>
+<h1>
+  <%= @event.present? ? "Available Tickets for #{@event.name}" : "All Available Tickets" %>
+</h1>
+
+<%= link_to "← Back to Events", events_path %>
+
 
 <% @tickets.each do |ticket| %>
   <div style="border: 1px solid #ccc; padding: 12px; margin-bottom: 10px;">

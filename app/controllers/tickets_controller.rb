@@ -3,7 +3,12 @@ class TicketsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-  @tickets = Ticket.includes(:event, :seller).where(status: "available")
+    if params[:event_id].present?
+      @event = Event.find(params[:event_id])
+      @tickets = @event.tickets.where(buyer_id: nil)
+    else
+      @tickets = Ticket.where(buyer_id: nil)
+    end
   end
 
   def new
