@@ -52,5 +52,11 @@
         </div>
       </div>
     <% end %>
+
+    <% if @tickets.empty? %>
+  <div class="text-center mt-5">
+    <p class="text-muted">No tickets found for the selected filters.</p>
+  </div>
+<% end %>
   </div>
 </div>
