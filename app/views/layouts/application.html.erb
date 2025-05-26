@@ -1,116 +1,71 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ticket Marketplace</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <%= link_to "TicketHub", root_path, class: "navbar-brand" %>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+      <div class="container">
+        <%= link_to "🎟️ Ticket Marketplace", root_path, class: "navbar-brand fw-bold" %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav me-auto">
 
-            <!-- Home -->
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: "nav-link" %>
-            </li>
-
-            <!-- Events -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="eventsDropdown" role="button" data-bs-toggle="dropdown">
-                Events
-              </a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Events</a>
               <ul class="dropdown-menu">
                 <li><%= link_to "All Events", events_path, class: "dropdown-item" %></li>
                 <li><%= link_to "Create Event", new_event_path, class: "dropdown-item" %></li>
               </ul>
             </li>
 
-            <!-- Tickets -->
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="ticketsDropdown" role="button" data-bs-toggle="dropdown">
-                Tickets
-              </a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Tickets</a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Find a Ticket", tickets_path, class: "dropdown-item" %></li>
                 <li><%= link_to "Sell a Ticket", new_ticket_path, class: "dropdown-item" %></li>
               </ul>
             </li>
 
-            <!-- My Account -->
-            <% if user_signed_in? %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
-                  My Account
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "My Profile", profile_user_path(current_user), class: "dropdown-item" %></li>
-                  <li><%= link_to "My Listings", listings_user_path(current_user), class: "dropdown-item" %></li>
-                  <li><%= link_to "My Purchases", purchases_user_path(current_user), class: "dropdown-item" %></li>
-                </ul>
-              </li>
-            <% end %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">My Account</a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "My Profile", current_user ? profile_user_path(current_user) : "#", class: "dropdown-item" %></li>
 
+                <li><%= link_to "My Listings", listings_user_path(current_user), class: "dropdown-item" %></li>
+                <li><%= link_to "My Purchases", purchases_user_path(current_user), class: "dropdown-item" %></li>
+              </ul>
+            </li>
           </ul>
 
-          <!-- Logout / Login -->
-          <ul class="navbar-nav">
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-              </li>
-            <% end %>
-          </ul>
+          <% if user_signed_in? %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-outline-primary me-2" %>
+            <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
     </nav>
 
+    <div class="container mt-4">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type == "notice" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
 
-    <%= yield %>
-  </body>
-
-  <% flash.each do |key, message| %>
-    <% alert_class = case key.to_sym
-      when :notice then "alert-success"
-      when :alert then "alert-danger"
-      when :error then "alert-danger"
-      else "alert-info"
-    end %>
-    <div class="alert <%= alert_class %> alert-dismissible fade show mt-2" role="alert">
-      <%= message %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <%= yield %>
     </div>
-  <% end %>
-
-
-
-  <% if user_signed_in? %>
-    <p>
-      Logged in as <strong><%= current_user.name %></strong>
-      |
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-    </p>
-  <% else %>
-    <p>
-      <%= link_to "Sign up", new_user_registration_path %> |
-      <%= link_to "Sign in", new_user_session_path %>
-    </p>
-  <% end %>
-
+  </body>
 </html>

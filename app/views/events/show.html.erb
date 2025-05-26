@@ -1,7 +1,7 @@
 <h1><%= @event.name %></h1>
 
 <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-  <img src="<%= @event.event_photo %>" alt="<%= @event.name %>" style="width: 300px; height: auto; border-radius: 8px;">
+      <%= image_tag url_for(@event.event_photo.variant(resize_to_limit: [300, 300])) %>
   
   <div>
     <p><strong>Category:</strong> <%= @event.category.capitalize %></p>
