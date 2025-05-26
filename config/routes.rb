@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root to: "tickets#index"
 
   # Tickets routes
-  resources :tickets, only: [:index, :new, :create, :show] do
+  resources :tickets, only: [:index, :show, :new, :create, :edit, :update] do
   member do
       post :purchase
     end

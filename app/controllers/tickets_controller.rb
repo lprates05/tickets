@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authorize_ticket_owner!, only: [:edit, :update, :destroy]
 
   def index
     if params[:event_id].present?
@@ -43,7 +43,42 @@ class TicketsController < ApplicationController
     end
   end
 
+  def edit
+    @ticket = Ticket.find(params[:id])
+  end
+
+  def update
+    @ticket = Ticket.find(params[:id])
+    if @ticket.seller_id == current_user.id
+      if @ticket.update(ticket_params)
+        redirect_to listings_user_path(current_user), notice: "Ticket updated successfully."
+      else
+        render :edit
+      end
+    else
+      redirect_to root_path, alert: "You’re not authorized to edit this ticket."
+    end
+  end
+
+
+  def destroy
+    @ticket = Ticket.find(params[:id])
+    if @ticket.seller_id == current_user.id
+      @ticket.destroy
+      redirect_to listings_user_path(current_user), notice: "Ticket deleted successfully."
+    else
+      redirect_to root_path, alert: "You're not authorized to delete this ticket."
+    end
+  end
+
   private
+
+  def authorize_ticket_owner!
+    ticket = Ticket.find(params[:id])
+    unless ticket.seller_id == current_user.id
+      redirect_to root_path, alert: "You are not authorized to do that."
+    end
+  end
 
   def ticket_params
     params.require(:ticket).permit(:price, :ticket_restrictions, :ticket_photo, :event_id)
