@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!
 
   def index
     if params[:event_id].present?
@@ -14,7 +14,6 @@ class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find(params[:id])
   end
-
 
   def new
     @ticket = Ticket.new
@@ -31,6 +30,16 @@ class TicketsController < ApplicationController
     else
       @events = Event.all
       render :new
+    end
+  end
+
+  def purchase
+    @ticket = Ticket.find(params[:id])
+    if @ticket.buyer_id.nil? && @ticket.seller_id != current_user.id
+      @ticket.update(buyer_id: current_user.id, status: "sold")
+      redirect_to purchases_user_path(current_user), notice: "Ticket purchased successfully."
+    else
+      redirect_to tickets_path, alert: "This ticket is not available."
     end
   end
 

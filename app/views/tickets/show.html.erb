@@ -8,4 +8,11 @@
   <img src="<%= @ticket.ticket_photo %>" alt="Ticket Photo" style="width: 300px; height: auto; border-radius: 8px;">
 <% end %>
 
-<%# In the next step, we’ll add a button to purchase if it's available %>
+<% if user_signed_in? && @ticket.buyer.nil? && @ticket.seller != current_user %>
+  <%= button_to "Buy Ticket", purchase_ticket_path(@ticket), method: :post, data: { turbo_confirm: "Are you sure you want to buy this ticket?" }, class: "btn btn-success" %>
+<% elsif @ticket.buyer.present? %>
+  <p><strong>Status:</strong> Sold</p>
+<% elsif @ticket.seller == current_user %>
+  <p><em>This is your own listing.</em></p>
+<% end %>
+

@@ -13,5 +13,9 @@
     <p><strong>Price:</strong> $<%= ticket.price %></p>
     <p><strong>Restrictions:</strong> <%= ticket.ticket_restrictions %></p>
     <p><strong>Status:</strong> <%= ticket.status.capitalize %></p>
+    <% if ticket.status == "available" && ticket.seller_id != current_user.id %>
+      <%= button_to "Buy Ticket", purchase_ticket_path(ticket), method: :post, class: "btn btn-primary" %>
+    <% end %>
+
   </div>
 <% end %>

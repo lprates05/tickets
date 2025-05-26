@@ -5,7 +5,9 @@
   <% @events.each do |event| %>
     <div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: 300px;">
       <img src="<%= event.event_photo %>" alt="Event photo" style="width: 100%; height: auto; border-radius: 4px;" />
-      <h2><%= event.name %></h2>
+      <h2>
+        <%= link_to event.name, event_path(event), style: "text-decoration: none; color: inherit;" %>
+      </h2>
       <p><strong>Category:</strong> <%= event.category %></p>
       <p><strong>Date:</strong> <%= event.start_date %> to <%= event.end_date %></p>
       <p><strong>Time:</strong> <%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %> <%= event.timezone %></p>

@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root to: "tickets#index"
 
   # Tickets routes
-  resources :tickets, only: [:index, :new, :create, :show]
+  resources :tickets, only: [:index, :new, :create, :show] do
+  member do
+      post :purchase
+    end
+  end
 
   # Events routes
   resources :events, only: [:index, :new, :create, :show]
