@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Root page
-  root to: "tickets#index"
+  root to: "main#homepage"
 
   # Tickets routes
   resources :tickets, only: [:index, :show, :new, :create, :edit, :update] do
