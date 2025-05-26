@@ -1,15 +1,13 @@
+<!-- app/views/main/homepage.html.erb -->
 
-<div class="container vh-100 d-flex flex-column justify-content-center align-items-center text-center">
-  <div class="mb-4">
-    <%= image_tag "Group 3 (4).png", alt: "Ticket Booth Logo", class: "img-fluid", style: "max-width: 250px;" %>
-  </div>
+<div class="homepage-hero d-flex flex-column justify-content-start align-items-center text-center">
+  <%= image_tag("Ticket Booth.png", alt: "Ticket Booth Logo", class: "homepage-logo mt-5 mb-3") %>
 
-  <h1 class="display-4 fw-bold mb-3">Welcome to Ticket Booth</h1>
-  <p class="lead mb-4">Buy and sell tickets for events at Chicago Booth</p>
+  <h2 class="text-white mb-4">Buy and sell tickets for events at Chicago Booth</h2>
 
   <div class="d-flex gap-3">
     <%= link_to "Find a Ticket", tickets_path, class: "btn btn-primary btn-lg" %>
-    <%= link_to "Sell a Ticket", new_ticket_path, class: "btn btn-outline-secondary btn-lg" %>
+    <%= link_to "Sell a Ticket", new_ticket_path, class: "btn btn-outline-light btn-lg" %>
   </div>
-
 </div>
+

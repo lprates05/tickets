@@ -14,4 +14,14 @@
  *= require_self
  */
 
- 
+.homepage-hero {
+  height: 100vh;
+  background: url("/assets/Movie Theater.jpg") center center / cover no-repeat;
+  padding-top: 8vh;
+  margin: 0;
+}
+
+.homepage-logo {
+  max-width: 500px;
+  width: 80%;
+}
