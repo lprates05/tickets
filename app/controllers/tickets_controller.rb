@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   
   before_action :authorize_ticket_owner!, only: [:edit, :update, :destroy]
+  before_action :ensure_ticket_is_available, only: [:edit, :update, :destroy]
 
   def index
     if params[:event_id].present?
@@ -83,5 +84,13 @@ class TicketsController < ApplicationController
   def ticket_params
     params.require(:ticket).permit(:price, :ticket_restrictions, :ticket_photo, :event_id)
   end
+
+  def ensure_ticket_is_available
+  @ticket = Ticket.find(params[:id])
+  unless @ticket.status == "available"
+    redirect_to listings_user_path(current_user), alert: "You can only edit or delete available tickets."
+  end
+end
+
 
 end
