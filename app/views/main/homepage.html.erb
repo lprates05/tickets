@@ -5,9 +5,15 @@
 
   <h2 class="text-white mb-4">Buy and sell tickets for events at Chicago Booth</h2>
 
+<% if user_signed_in? %>
   <div class="d-flex gap-3">
     <%= link_to "Find a Ticket", tickets_path, class: "btn btn-primary btn-lg" %>
     <%= link_to "Sell a Ticket", new_ticket_path, class: "btn btn-outline-light btn-lg" %>
   </div>
+<% else %>
+      <div>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Register", new_user_registration_path, class: "btn btn-outline-light btn-lg" %>
+      </div>
+<% end %>
 </div>
-
