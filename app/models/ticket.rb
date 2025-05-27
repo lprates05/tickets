@@ -31,6 +31,9 @@ class Ticket < ApplicationRecord
 
   before_save :sync_status_with_buyer
 
+  validates :price, :event, presence: true
+
+
     private
 
     def sync_status_with_buyer
