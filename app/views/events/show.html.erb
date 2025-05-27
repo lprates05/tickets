@@ -16,7 +16,7 @@
   <% if current_user&.admin? %>
     <div class="d-flex justify-content-end mb-3" style="gap: 0.5rem;">
       <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-sm btn-outline-secondary" %>
-      <%= link_to "Delete Event", @event, data: { turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "btn btn-sm btn-outline-danger" %>
+      <%= link_to "Delete Event", @event, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-sm btn-outline-danger" %>
       <a href = "/events/4" data-turbo-method="delete" data-turbo-confirm="Are you sure?">Delete</a>
     </div>
   <% end %>

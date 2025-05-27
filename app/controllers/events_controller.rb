@@ -30,7 +30,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    if @event.destroy(event_params)
+    if @event.destroy
         redirect_to @event
     else
         render :show, alert: "Unable to delete event"
