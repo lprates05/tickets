@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get :purchases
     end
   end
+  get "/my_profile", to: "users#profile", as: :my_profile
 
   get "users/:id/profile", to: "users#profile", as: "profile_user"
 

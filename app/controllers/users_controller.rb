@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @user = User.find(params[:id])
+    @user = current_user
     @listed_tickets = @user.listings
     @purchased_tickets = @user.purchases
   end
@@ -32,15 +32,13 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
-        @user.reload 
-        redirect_to @user, notice: "Profile updated!"
-      else
-        render :edit
-      end
-  end
-
-  
+      redirect_to my_profile_path, notice: "Profile updated!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end 
 
 
   private
