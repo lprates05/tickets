@@ -3,6 +3,7 @@
 # Table name: tickets
 #
 #  id                  :integer          not null, primary key
+#  observations        :text
 #  price               :float
 #  status              :string
 #  ticket_photo        :string
