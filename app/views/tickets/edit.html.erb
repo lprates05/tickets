@@ -12,6 +12,11 @@
   </div>
 
   <div>
+    <%= form.label :ticket_observations %>
+    <%= form.text_field :ticket_observations %>
+  </div>
+
+  <div>
     <%= form.submit "Update Ticket", class: "btn btn-primary" %>
   </div>
 <% end %>

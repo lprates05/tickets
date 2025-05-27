@@ -25,7 +25,12 @@
           <%= form.label :ticket_restrictions, "Ticket Restrictions" %>
           <%= form.text_field :ticket_restrictions, placeholder: "e.g., Exclusive to Booth Students, Partners Allowed, BTG members only", class: "form-control" %>
         </div>
-        
+
+        <div class="mb-3">
+          <%= form.label :ticket_observations, "Observations" %>
+          <%= form.text_field :ticket_observations, placeholder: "e.g., I will make the ticket transfer via email, No refunds accepted, etc.", class: "form-control" %>
+        </div>
+
         <div class="mb-3">
           <%= form.label :ticket_photo, "Ticket Photo" %>
           <%= form.file_field :ticket_photo, class: "form-control" %>
