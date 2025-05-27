@@ -19,8 +19,8 @@
   <p><strong>Status:</strong> Sold</p>
 <% elsif @ticket.seller == current_user %>
       <div class="d-flex justify-content-end mb-3" style="gap: 0.5rem;">
-      <%= link_to "Edit Ticket", edit_ticket_path(@event), class: "btn btn-sm btn-outline-secondary" %>
-      <%= link_to "Delete Ticket", ticket_path(@event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+      <%= link_to "Edit Ticket", edit_ticket_path(@ticket), class: "btn btn-sm btn-outline-secondary" %>
+      <%= link_to "Delete Ticket", ticket_path(@ticket), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
 
     </div>
 <% end %>
