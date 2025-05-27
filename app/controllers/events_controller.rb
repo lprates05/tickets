@@ -16,11 +16,16 @@ class EventsController < ApplicationController
   end
 
   def update
-    
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event updated successfully."
+    else
+      render :edit, alert: "There was a problem updating the event."
+    end
   end
 
   def edit
-    
+    @event = Event.find(params[:id])  
   end
 
   def destroy

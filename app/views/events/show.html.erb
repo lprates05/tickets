@@ -22,6 +22,14 @@
 
     <% end %>
   </ul>
+
+  <% if current_user&.admin? %>
+          <div class="d-flex justify-content-between">
+            <%= link_to "Edit", edit_event_path(@event), class: "btn btn-sm btn-warning" %>
+            <%= link_to "Delete", event_path(@event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+
+          </div>
+        <% end %>
 <% else %>
   <p>No tickets available for this event.</p>
 <% end %>

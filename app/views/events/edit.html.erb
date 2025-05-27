@@ -1,0 +1,49 @@
+<h1>Edit Event</h1>
+
+<%= form_with model: @event, local: true, html: { multipart: true } do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Event Name" %>
+    <%= form.text_field :name, class: "form-control", value: @event.name %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category %>
+    <%= form.text_field :category, class: "form-control", value: @event.category %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date, class: "form-control", value: @event.start_date %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date, class: "form-control", value: @event.end_date %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :start_time %>
+    <%= form.time_field :start_time, class: "form-control", value: @event.start_time.strftime("%H:%M") if @event.start_time %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :end_time %>
+    <%= form.time_field :end_time, class: "form-control", value: @event.end_time.strftime("%H:%M") if @event.end_time %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :timezone %>
+    <%= form.text_field :timezone, class: "form-control", value: @event.timezone %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :event_photo %>
+    <%= form.file_field :event_photo, class: "form-control" %>
+    <% if @event.event_photo.attached? %>
+      <p class="mt-2">Current Photo:</p>
+      <%= image_tag @event.event_photo, class: "img-thumbnail", style: "max-height: 150px;" %>
+    <% end %>
+  </div>
+
+  <%= form.submit "Update Event", class: "btn btn-primary" %>
+<% end %>

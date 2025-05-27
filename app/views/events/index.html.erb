@@ -18,7 +18,7 @@
         <%= link_to event.name, event_path(event), style: "text-decoration: none; color: inherit;" %>
       </h2>
       <p><strong>Category:</strong> <%= event.category %></p>
-      <p><strong>Date:</strong> <%= event.start_date %> to <%= event.end_date %></p>
+      <p><strong>Date:</strong> <%= event.start_date.strftime("%m/%d/%Y") %> to <%= event.end_date.strftime("%m/%d/%Y") %></p>
       <p><strong>Time:</strong> <%= event.start_time.strftime("%I:%M %p") %> - <%= event.end_time.strftime("%I:%M %p") %> 
 
       <% available_tickets = event.tickets.where(buyer_id: nil) %>
@@ -28,12 +28,7 @@
         <p style="color: gray;">No tickets available</p>
       <% end %>
 
-       <% if current_user&.admin? %>
-          <div class="d-flex justify-content-between">
-            <%= link_to "Edit", edit_event_path(event), class: "btn btn-sm btn-warning" %>
-            <%= link_to "Delete", event_path(event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
-          </div>
-        <% end %>      
+             
     </div>
   <% end %>
 </div>
