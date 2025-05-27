@@ -61,7 +61,7 @@
             <p><strong>Event Time:</strong> <%= ticket.event.start_time.strftime("%I:%M %p") %> - <%= ticket.event.end_time.strftime("%I:%M %p") %></p>
           </p>
           <p class="mb-0"><strong>Ticket Restrictions:</strong></p>
-            <p class="btn btn-sm btn-outline-danger"><%= ticket.ticket_restrictions.presence || "None" %></p>
+            <p class="outline-danger"><%= ticket.ticket_restrictions.presence || "None" %></p>
         </div>
 
         <!-- Right Column: Price + Status -->
