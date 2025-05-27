@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  admin                  :boolean
 #  bio                    :text
 #  class_year             :integer
 #  email                  :string

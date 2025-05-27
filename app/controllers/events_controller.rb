@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   
+  before_action :authorize_admin!, only: [:edit, :update, :destroy]
+
   def index
     @events = Event.all
   end
@@ -28,6 +30,12 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def authorize_admin!
+    unless current_user&.admin?
+      redirect_to events_path, alert: "You are not authorized to perform this action."
+    end
+  end
 
   def event_params
     params.require(:event).permit(

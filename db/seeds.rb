@@ -11,25 +11,26 @@ require "open-uri"
 
 # Create sample users
 user1 = User.create!(
-  name: "Alice Example",
+  name: "Alice Adams",
   email: "alice@example.com",
   password: "password",
   profile_photo: "https://picsum.photos/seed/alice/200/200",
   class_year: 2025,
   bio: "Love live music and networking events."
+  admin: true
 )
 
 user2 = User.create!(
-  name: "Bob Example",
+  name: "Bob Brown",
   email: "bob@example.com",
   password: "password",
   profile_photo: "https://picsum.photos/seed/bob/200/200",
   class_year: 2025,
   bio: "Sports enthusiast and occasional concertgoer."
+  admin: false
 )
 
 puts "Users created."
 
 # Define event categories
 categories = ["Party", "Conference", "Professional", "Social", "Sports"]
-
