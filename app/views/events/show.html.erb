@@ -1,15 +1,24 @@
 <h1><%= @event.name %></h1>
 
 <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-      <%= image_tag url_for(@event.event_photo.variant(resize_to_limit: [300, 300])) %>
+      <% if @event.event_photo.attached? %>
+        <%= image_tag @event.event_photo, class: "img-fluid rounded mb-3", style: "max-height: 300px;" %>
+      <% end %>
   
   <div>
     <p><strong>Category:</strong> <%= @event.category.capitalize %></p>
-    <p><strong>Start:</strong> <%= @event.start_date %> at <%= @event.start_time.strftime('%I:%M %p') %></p>
-    <p><strong>End:</strong> <%= @event.end_date %> at <%= @event.end_time.strftime('%I:%M %p') %></p>
-    <p><strong>Timezone:</strong> <%= @event.timezone %></p>
+    <p><strong>Date:</strong> <%= @event.start_date.strftime("%m/%d/%Y") %> to <%= @event.end_date.strftime("%m/%d/%Y") %></p>
+    <p><strong>Time:</strong> <%= @event.start_time.strftime("%I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p") %>
   </div>
 </div>
+
+  <% if current_user&.admin? %>
+    <div class="d-flex justify-content-end mb-3" style="gap: 0.5rem;">
+      <%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-sm btn-outline-secondary" %>
+      <%= link_to "Delete Event", event_path(@event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+
+    </div>
+  <% end %>
 
 <% if @tickets.any? %>
   <h2>Available Tickets</h2>
@@ -22,14 +31,7 @@
 
     <% end %>
   </ul>
-
-  <% if current_user&.admin? %>
-          <div class="d-flex justify-content-between">
-            <%= link_to "Edit", edit_event_path(@event), class: "btn btn-sm btn-warning" %>
-            <%= link_to "Delete", event_path(@event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
-
-          </div>
-        <% end %>
+  
 <% else %>
   <p>No tickets available for this event.</p>
 <% end %>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: "main#homepage"
 
   # Tickets routes
-  resources :tickets, only: [:index, :show, :new, :create, :edit, :update] do
+  resources :tickets, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
   member do
       post :purchase
     end

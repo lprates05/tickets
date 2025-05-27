@@ -1,20 +1,26 @@
 <h1>Ticket Details</h1>
 
-<p><strong>Price:</strong> $<%= @ticket.price %></p>
-<p><strong>Seller:</strong> <%= @ticket.seller.name %></p>
-<p><strong>Status:</strong> <%= @ticket.status %></p>
-
-<% if @ticket.ticket_photo.attached? %>
+<div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+      <% if @ticket.ticket_photo.attached? %>
+        <%= image_tag @ticket.ticket_photo, class: "img-fluid rounded mb-3", style: "max-height: 300px;" %>
+      <% end %>
+  
   <div>
-    <p><strong>Photo:</strong></p>
-    <%= image_tag url_for(@ticket.ticket_photo.variant(resize_to_limit: [300, 300])) %>
+    <p><strong>Price:</strong> $<%= @ticket.price %></p>
+    <p><strong>Seller:</strong> <%= @ticket.seller.name %></p>
+    <p><strong>Status:</strong> <%= @ticket.status.capitalize %></p>
   </div>
-<% end %>
+</div>
+
 
 <% if user_signed_in? && @ticket.buyer.nil? && @ticket.seller != current_user %>
   <%= button_to "Buy Ticket", purchase_ticket_path(@ticket), method: :post, data: { turbo_confirm: "Are you sure you want to buy this ticket?" }, class: "btn btn-success" %>
 <% elsif @ticket.buyer.present? %>
   <p><strong>Status:</strong> Sold</p>
 <% elsif @ticket.seller == current_user %>
-  <p><em>This is your own listing.</em></p>
+      <div class="d-flex justify-content-end mb-3" style="gap: 0.5rem;">
+      <%= link_to "Edit Ticket", edit_ticket_path(@event), class: "btn btn-sm btn-outline-secondary" %>
+      <%= link_to "Delete Ticket", ticket_path(@event), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+
+    </div>
 <% end %>
