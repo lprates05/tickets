@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   # Events routes
-  resources :events, only: [:index, :new, :create, :show]
+  resources :events, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   # User-specific routes
   resources :users, only: [] do
