@@ -12,7 +12,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 
-Turbo.session.drive = false
+Turbo.session.drive = true
 
 import "controllers"
 
