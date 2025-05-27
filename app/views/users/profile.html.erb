@@ -1,19 +1,34 @@
-<div class="container mt-5">
-  <div class="card shadow-sm p-4">
-    <div class="d-flex align-items-center mb-4">
-      <% if current_user.profile_photo.present? %>
-        <img src="<%= current_user.profile_photo %>" alt="Profile Photo" class="rounded-circle me-3" width="80" height="80">
-      <% else %>
-        <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center text-white me-3" style="width: 80px; height: 80px;">
-          <strong><%= current_user.name.first %></strong>
-        </div>
+
+
+<div class="card p-4 mb-4">
+  <div class="d-flex justify-content-between align-items-start" style="gap: 2rem;">
+    
+    <!-- Left: Profile Photo + Info -->
+    <div class="d-flex align-items-start" style="gap: 1.5rem;">
+      <% if @user.profile_photo.attached? %>
+        <%= image_tag @user.profile_photo.variant(resize_to_fill: [100, 100]), class: "rounded-circle", style: "object-fit: cover;" %>
       <% end %>
+
       <div>
-        <h4 class="mb-0"><%= current_user.name %></h4>
-        <small class="text-muted"><%= current_user.email %></small>
+        <h4 class="fw-bold mb-1"><%= @user.name %></h4>
+        <p class="mb-1"><strong>Email:</strong> <%= @user.email %></p>
+        <p class="mb-1"><strong>Class Year:</strong> <%= @user.class_year %></p>
+        <p class="mb-0"><strong>Bio:</strong> <%= @user.bio %></p>
       </div>
     </div>
 
+    <!-- Right: Edit Button -->
+    <div>
+      <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %>
+    </div>
+
+  </div>
+
+
+
+    </div>
+
+    
     <div class="row">
       <div class="col-md-6 mb-3">
         <h6 class="text-uppercase text-muted">My Listings</h6>
@@ -25,4 +40,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

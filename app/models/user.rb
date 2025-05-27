@@ -11,7 +11,6 @@
 #  listings_count         :integer
 #  name                   :string
 #  password               :string
-#  profile_photo          :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -37,4 +36,9 @@ class User < ApplicationRecord
            class_name: "Ticket",
            foreign_key: "buyer_id",
            dependent: :nullify
+
+  has_one_attached :profile_photo
+
+validates :name, :class_year, :email, presence: true
+
 end

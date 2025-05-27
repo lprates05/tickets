@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   # User-specific routes
-  resources :users, only: [] do
+  resources :users, only: [:show, :edit, :update] do
     member do
       get :listings
       get :purchases

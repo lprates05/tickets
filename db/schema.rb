@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_27_170259) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_27_190606) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,7 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_27_170259) do
     t.string "name"
     t.string "email"
     t.string "password"
-    t.string "profile_photo"
     t.integer "class_year"
     t.text "bio"
     t.integer "listings_count"

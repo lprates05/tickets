@@ -1,0 +1,18 @@
+<!-- app/views/users/show.html.erb -->
+
+<div class="container mt-4">
+  <h2><%= @user.name %>'s Profile</h2>
+
+  <% if @user.profile_photo.attached? %>
+    <%= image_tag @user.profile_photo.variant(resize_to_limit: [150, 150]), class: "rounded mb-3" %>
+  <% else %>
+    <%= image_tag "https://via.placeholder.com/150?text=No+Photo", class: "rounded mb-3" %>
+  <% end %>
+
+
+  <p><strong>Email:</strong> <%= @user.email %></p>
+  <p><strong>Class Year:</strong> <%= @user.class_year %></p>
+  <p><strong>Bio:</strong> <%= @user.bio %></p>
+
+  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary mt-3" %>
+</div>

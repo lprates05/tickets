@@ -1,0 +1,39 @@
+<h2>Edit Profile</h2>
+
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Fix errors before continuing:</h4>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @user, local: true, html: { multipart: true }) do |form| %>
+
+  <div class="mb-3">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :profile_photo %>
+    <%= form.file_field :profile_photo, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :class_year %>
+    <%= form.number_field :class_year, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :bio %>
+    <%= form.text_area :bio, rows: 4, class: "form-control" %>
+  </div>
+
+  <hr>
+
+  <%= form.submit "Update Profile", class: "btn btn-primary" %>
+<% end %>

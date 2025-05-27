@@ -49,6 +49,7 @@
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">My Account</a>
             <ul class="dropdown-menu">
               <li><%= link_to "My Profile", profile_user_path(current_user), class: "dropdown-item" %></li>
+              
               <li><%= link_to "My Listings", listings_user_path(current_user), class: "dropdown-item" %></li>
               <li><%= link_to "My Purchases", purchases_user_path(current_user), class: "dropdown-item" %></li>
             </ul>
