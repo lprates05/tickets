@@ -1,9 +1,9 @@
 # Clear all existing data
-Ticket.destroy_all
-Event.destroy_all
-User.destroy_all
-ActiveStorage::Attachment.destroy_all
-ActiveStorage::Blob.destroy_all
+#Ticket.destroy_all
+#Event.destroy_all
+#User.destroy_all
+#ActiveStorage::Attachment.destroy_all
+#ActiveStorage::Blob.destroy_all
 
 puts "Old data cleared."
 
