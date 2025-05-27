@@ -1,5 +1,16 @@
 <h1>Edit Event</h1>
 
+<% if @event.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Fix errors before updating an event:</h4>
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: @event, local: true, html: { multipart: true } do |form| %>
   <div class="mb-3">
     <%= form.label :name, "Event Name" %>
@@ -8,7 +19,7 @@
 
   <div class="mb-3">
     <%= form.label :category %>
-    <%= form.text_field :category, class: "form-control", value: @event.category %>
+    <%= form.select :category, options_for_select(["Party", "Conference", "Professional", "Social", "Sports"], @event.category), {}, class: "form-select" %>
   </div>
 
   <div class="mb-3">
